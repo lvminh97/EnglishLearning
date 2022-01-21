@@ -62,8 +62,11 @@ public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
         btnListen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sound = vocabulary.getSound();
+                if(language.equals("chinese"))
+                    sound += "_";
                 MediaPlayer mediaPlayer = MediaPlayer.create(context,
-                        context.getResources().getIdentifier(vocabulary.getSound(), "raw", context.getPackageName()));
+                        context.getResources().getIdentifier(sound, "raw", context.getPackageName()));
                 mediaPlayer.start();
             }
         });
