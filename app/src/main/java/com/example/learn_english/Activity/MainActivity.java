@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import com.example.learn_english.Database.Model;
 import com.example.learn_english.Fragment.ChineseFragment;
 import com.example.learn_english.Fragment.EnglishFragment;
+import com.example.learn_english.Fragment.TranslateFragment;
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 import com.google.android.material.navigation.NavigationView;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 loadChineseFragment();
                 break;
             case R.id.nav_translate:
+                loadTranslateFragment();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -118,6 +120,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void loadChineseFragment(){
         Fragment fragment = new ChineseFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_framelayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void loadTranslateFragment(){
+        Fragment fragment = new TranslateFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_framelayout, fragment);
         transaction.addToBackStack(null);
