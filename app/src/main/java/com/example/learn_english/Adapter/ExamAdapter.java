@@ -18,6 +18,8 @@ public class ExamAdapter extends FragmentStatePagerAdapter {
 
     List<Exam> listExam;
     OnUpdateResult onUpdateResult;
+    String language;
+
     public ExamAdapter(@NonNull FragmentManager fm, List<Exam> listExam, OnUpdateResult onUpdateResult) {
         super(fm);
         this.listExam = listExam;

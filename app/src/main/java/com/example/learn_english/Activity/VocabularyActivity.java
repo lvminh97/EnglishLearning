@@ -23,6 +23,7 @@ public class VocabularyActivity extends AppCompatActivity {
     ListView lvVocabulary;
     FloatingActionButton fabExam;
     int topicID;
+    String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,14 @@ public class VocabularyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vocabulary);
 
         topicID  = getIntent().getIntExtra("topic_id", 0);
+        language = getIntent().getStringExtra("language");
 
         lvVocabulary = findViewById(R.id.lv_vocabulary);
         fabExam = findViewById(R.id.fab_exam);
 
         Model model = new Model(VocabularyActivity.this);
         final List<Vocabulary> listVocabulary = model.getListVocabulary(topicID);
-        VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(VocabularyActivity.this, R.layout.item_vocabulary, listVocabulary);
+        VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(VocabularyActivity.this, R.layout.item_vocabulary, listVocabulary, language);
         lvVocabulary.setAdapter(vocabularyAdapter);
 
 
@@ -45,6 +47,7 @@ public class VocabularyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(VocabularyActivity.this, ExamActivity.class);
                 intent.putExtra("topic_id", topicID);
+                intent.putExtra("language", language);
                 startActivity(intent);
             }
         });

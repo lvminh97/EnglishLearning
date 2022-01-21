@@ -24,13 +24,15 @@ public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
     Context context;
     int resource;
     List<Vocabulary> listVocabulary;
+    String language;
 
-    public VocabularyAdapter(@NonNull Context context, int resource, @NonNull List<Vocabulary> objects) {
+    public VocabularyAdapter(@NonNull Context context, int resource, @NonNull List<Vocabulary> objects, String language) {
         super(context, resource, objects);
 
         this.context = context;
         this.resource = resource;
         this.listVocabulary = objects;
+        this.language = language;
     }
 
     @NonNull
@@ -51,7 +53,10 @@ public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        txtEnglish.setText(vocabulary.getEnglish());
+        if(language.equals("chinese"))
+            txtEnglish.setText(vocabulary.getChinese());
+        else
+            txtEnglish.setText(vocabulary.getEnglish());
         txtVietnamese.setText(vocabulary.getVietnamese());
 
         btnListen.setOnClickListener(new View.OnClickListener() {

@@ -53,6 +53,7 @@ public class ChineseFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), VocabularyActivity.class);
                 intent.putExtra("topic_id", listTopic.get(position).getTopicID());
+                intent.putExtra("language", "chinese");
                 startActivity(intent);
             }
         });

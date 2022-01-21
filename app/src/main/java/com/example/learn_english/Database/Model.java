@@ -99,10 +99,11 @@ public class Model extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             listVocabulary.add(new Vocabulary(cursor.getInt(0),
                     cursor.getInt(1),
-                    cursor.getInt(5),
+                    cursor.getInt(6),
                     cursor.getString(3),
                     cursor.getString(4),
-                    cursor.getString(6)));
+                    cursor.getString(5),
+                    cursor.getString(7)));
         }
 
         return listVocabulary;
@@ -116,26 +117,36 @@ public class Model extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             listVocabulary.add(new Vocabulary(cursor.getInt(0),
                     cursor.getInt(1),
-                    cursor.getInt(5),
+                    cursor.getInt(6),
                     cursor.getString(3),
                     cursor.getString(4),
-                    cursor.getString(6)));
+                    cursor.getString(5),
+                    cursor.getString(7)));
         }
 
         return listVocabulary;
     }
 
-    public List<Exam> getListExam(int topicID) {
+    public List<Exam> getListExam(int topicID, String language) {
         String sql = "SELECT * FROM test WHERE baiTest = " +  topicID  + " ORDER BY RANDOM() LIMIT 5";
         Cursor cursor = db.rawQuery(sql, null);
 
         List<Exam> listExam = new ArrayList<>();
         while (cursor.moveToNext()) {
+            String ans1, ans2, ans3;
+            ans1 = cursor.getString(2);
+            ans2 = cursor.getString(3);
+            ans3 = cursor.getString(4);
+            if(language.equals("chinese")){
+                ans1 = cursor.getString(5);
+                ans2 = cursor.getString(6);
+                ans3 = cursor.getString(7);
+            }
             listExam.add(new Exam(cursor.getInt(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
+                    ans1,
+                    ans2,
+                    ans3,
+                    cursor.getString(8),
                     "x"));
         }
 

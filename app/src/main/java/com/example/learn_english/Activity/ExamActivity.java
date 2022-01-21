@@ -18,6 +18,7 @@ public class ExamActivity extends AppCompatActivity implements OnUpdateResult {
 
     ViewPager vpExam;
     int total = 0;
+    String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,11 @@ public class ExamActivity extends AppCompatActivity implements OnUpdateResult {
         setContentView(R.layout.activity_exam);
 
         int topicID = getIntent().getIntExtra("topic_id", 0);
+        language = getIntent().getStringExtra("language");
 
         vpExam = findViewById(R.id.vp_exam);
         Model model = new Model(ExamActivity.this);
-        List<Exam> listExam = model.getListExam(topicID);
+        List<Exam> listExam = model.getListExam(topicID, language);
         total = listExam.size();
         ExamAdapter examAdapter = new ExamAdapter(getSupportFragmentManager(), listExam, ExamActivity.this);
         vpExam.setAdapter(examAdapter);
