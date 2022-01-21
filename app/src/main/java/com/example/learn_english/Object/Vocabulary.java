@@ -8,14 +8,16 @@ public class Vocabulary implements Serializable {
     int vocabularyImage;
     String english;
     String vietnamese;
+    String chinese;
     String sound;
 
-    public Vocabulary(int vocabularyID, int topicID, int vocabularyImage, String english, String vietnamese, String sound) {
+    public Vocabulary(int vocabularyID, int topicID, int vocabularyImage, String english, String vietnamese, String chinese, String sound) {
         this.vocabularyID = vocabularyID;
         this.topicID = topicID;
         this.vocabularyImage = vocabularyImage;
         this.english = english;
         this.vietnamese = vietnamese;
+        this.chinese = chinese;
         this.sound = sound;
     }
 
@@ -57,6 +59,14 @@ public class Vocabulary implements Serializable {
 
     public void setVietnamese(String vietnamese) {
         this.vietnamese = vietnamese;
+    }
+
+    public String getChinese() {
+        return chinese;
+    }
+
+    public void setChinese(String chinese) {
+        this.chinese = chinese;
     }
 
     public String getSound() {

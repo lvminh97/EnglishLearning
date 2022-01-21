@@ -5,6 +5,9 @@
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/teal</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>

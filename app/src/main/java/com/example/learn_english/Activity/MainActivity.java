@@ -1,54 +1,64 @@
 package com.example.learn_english.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import com.example.learn_english.Adapter.TopicAdapter;
+
 import com.example.learn_english.Database.Model;
-import com.example.learn_english.Object.Topic;
+import com.example.learn_english.Fragment.ChineseFragment;
+import com.example.learn_english.Fragment.EnglishFragment;
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    String TAG = "my_MainActivity";
-    GridView grvTopic;
+    private final String TAG = "my_MainActivity";
+//    private GridView grvTopic;
+
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        grvTopic = findViewById(R.id.grv_topic);
+        initNavigationDrawer();
+        loadEnglishFragment();
+    }
 
-        Model model = new Model(MainActivity.this);
-        if (!model.isCopyDB()) {
-            model.copyDB();
-        }
-
-        final List<Topic> listTopic = model.getListTopic();
-        TopicAdapter topicAdapter = new TopicAdapter(MainActivity.this, R.layout.item_topic, listTopic);
-        grvTopic.setAdapter(topicAdapter);
-
-        grvTopic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, VocabularyActivity.class);
-                intent.putExtra("topic_id", listTopic.get(position).getTopicID());
-                startActivity(intent);
-            }
-        });
+    private void initNavigationDrawer(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(Color.rgb(255, 255, 255));
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
@@ -80,5 +90,42 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_english:
+                loadEnglishFragment();
+                break;
+            case R.id.nav_chinese:
+                loadChineseFragment();
+                break;
+            case R.id.nav_translate:
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void loadEnglishFragment(){
+        Fragment fragment = new EnglishFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_framelayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void loadChineseFragment(){
+        Fragment fragment = new ChineseFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_framelayout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 }
