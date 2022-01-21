@@ -75,5 +75,19 @@
         android:layout_height="160dp"
         android:inputType="text|textMultiLine"
         android:gravity="top"
-        android:background="@drawable/bg_edit_text"/>
+        android:background="@drawable/bg_edit_text"
+        android:enabled="false"/>
+    <Button
+        android:id="@+id/btn_translate"
+        app:layout_constraintTop_toBottomOf="@id/ed_targettext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Dịch"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
