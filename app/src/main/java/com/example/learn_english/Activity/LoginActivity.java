@@ -69,6 +69,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            SharedPreferences pref = getSharedPreferences("LANG_AUTH", MODE_PRIVATE);
+                            pref.edit().putString("username", emailEd.getText().toString()).commit();
+                            pref.edit().putString("password", passwordEd.getText().toString()).commit();
                             Toast.makeText(getBaseContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(intent);

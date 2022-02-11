@@ -25,6 +25,7 @@ import com.example.learn_english.Fragment.TranslateFragment;
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,11 +33,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private final String TAG = "my_MainActivity";
-//    private GridView grvTopic;
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private Toolbar toolbar;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        mAuth = FirebaseAuth.getInstance();
 
         initNavigationDrawer();
         loadEnglishFragment();
@@ -105,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_translate:
                 loadTranslateFragment();
                 break;
+            case R.id.nav_logout:
+                logout();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -132,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.replace(R.id.nav_host_framelayout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void logout(){
+        mAuth.signOut();
+        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
