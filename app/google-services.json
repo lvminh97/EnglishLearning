@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "208996938348",
+    "project_id": "languagelearning-aac28",
+    "storage_bucket": "languagelearning-aac28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208996938348:android:af16ec36e167f2cd6d1e49",
+        "android_client_info": {
+          "package_name": "com.example.learn_english"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208996938348-353ilrvki6m6ne715c59k4bfqbhcf9s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnhBS9fwBJmvPt0jh3EPS4JLEFqno9sOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208996938348-353ilrvki6m6ne715c59k4bfqbhcf9s3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
