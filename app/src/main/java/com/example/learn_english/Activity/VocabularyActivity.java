@@ -72,7 +72,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
         }
         else if(v.getId() == R.id.fab_add_vocabulary){
             Intent intent = new Intent(getBaseContext(), AddVocabularyActivity.class);
-            intent.putExtra("lang", "english");
+            intent.putExtra("lang", lang);
             intent.putExtra("topic_id", topicID);
             startActivity(intent);
         }

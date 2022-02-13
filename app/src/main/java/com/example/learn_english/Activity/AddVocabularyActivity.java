@@ -46,14 +46,14 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
         meanEd = findViewById(R.id.ed_mean);
         vocabularyImg = findViewById(R.id.img_vocabulary);
         vocabularyImg.setOnClickListener(this);
-        addBtn = findViewById(R.id.btn_add_topic);
+        addBtn = findViewById(R.id.btn_add_vocabulary);
         addBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_add_topic){
-            addTopic();
+        if(v.getId() == R.id.btn_add_vocabulary){
+            addVocabulary();
         }
         else if(v.getId() == R.id.img_vocabulary){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -82,7 +82,7 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void addTopic(){
+    private void addVocabulary(){
 //        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if(Model.listVocabulary.size() == 0){
@@ -104,6 +104,7 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
             public void onComplete(@NonNull Task<Void> task) {
                 Intent intent = new Intent(getBaseContext(), VocabularyActivity.class);
                 intent.putExtra("topic_id", topicID);
+                intent.putExtra("lang", lang);
                 startActivity(intent);
             }
         });

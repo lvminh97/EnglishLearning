@@ -82,7 +82,7 @@ public class AddTopicActivity extends AppCompatActivity implements View.OnClickL
     private void addTopic(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid().toString()).collection("english").document();
+        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid().toString()).collection(lang).document();
         HashMap<String, String> map = new HashMap<>();
         topicImg.buildDrawingCache();
         Bitmap bitmap = topicImg.getDrawingCache();
@@ -95,7 +95,7 @@ public class AddTopicActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.putExtra("tab", lang);
+                intent.putExtra("lang", lang);
                 startActivity(intent);
             }
         });

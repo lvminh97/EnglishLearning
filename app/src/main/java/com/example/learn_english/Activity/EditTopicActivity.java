@@ -114,7 +114,7 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
     private void updateTopic(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
+        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection(lang).document(topicID);
         HashMap<String, String> map = new HashMap<>();
         topicImg.buildDrawingCache();
         Bitmap bitmap = topicImg.getDrawingCache();

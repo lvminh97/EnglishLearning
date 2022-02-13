@@ -94,7 +94,7 @@ public class EnglishFragment extends Fragment implements View.OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), VocabularyActivity.class);
         intent.putExtra("topic_id", Model.listTopic.get(position).getTopicID());
-        intent.putExtra("language", "english");
+        intent.putExtra("lang", "english");
         startActivity(intent);
     }
 
