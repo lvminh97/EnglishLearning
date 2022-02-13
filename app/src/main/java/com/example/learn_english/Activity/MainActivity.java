@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
 
     private FirebaseAuth mAuth;
+    private String lang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,24 +52,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("account").document(mAuth.getCurrentUser().getUid());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        Log.d("MyApp", "Data: " + document.getData());
-                    }
-                }
-            }
-        });
-
         initNavigationDrawer();
-        loadEnglishFragment();
+        mAuth = FirebaseAuth.getInstance();
+        lang = getIntent().getStringExtra("lang");
+        if(lang != null && lang.equals("chinese"))
+            loadChineseFragment();
+        else
+            loadEnglishFragment();
     }
 
     private void initNavigationDrawer(){

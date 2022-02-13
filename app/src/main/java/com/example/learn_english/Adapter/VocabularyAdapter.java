@@ -1,6 +1,8 @@
 package com.example.learn_english.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
@@ -18,21 +20,20 @@ import com.example.learn_english.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 
 public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
     Context context;
     int resource;
     List<Vocabulary> listVocabulary;
-    String language;
 
-    public VocabularyAdapter(@NonNull Context context, int resource, @NonNull List<Vocabulary> objects, String language) {
+    public VocabularyAdapter(@NonNull Context context, int resource, @NonNull List<Vocabulary> objects) {
         super(context, resource, objects);
 
         this.context = context;
         this.resource = resource;
         this.listVocabulary = objects;
-        this.language = language;
     }
 
     @NonNull
@@ -46,28 +47,22 @@ public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
         ImageView btnListen = convertView.findViewById(R.id.btn_listen);
 
         final Vocabulary vocabulary = listVocabulary.get(position);
-        try {
-            InputStream inputStream = context.getAssets().open("image/" + vocabulary.getVocabularyImage() + ".jpg");
-            Drawable drawable = Drawable.createFromStream(inputStream, null);
-            imgVocabulary.setImageDrawable(drawable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(language.equals("chinese"))
-            txtEnglish.setText(vocabulary.getChinese());
-        else
-            txtEnglish.setText(vocabulary.getEnglish());
-        txtVietnamese.setText(vocabulary.getVietnamese());
+
+        byte[] decodedString = Base64.getDecoder().decode(vocabulary.getVocabularyImage());
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imgVocabulary.setImageBitmap(decodedByte);
+        txtEnglish.setText(vocabulary.getVocabulary());
+        txtVietnamese.setText(vocabulary.getMean());
 
         btnListen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sound = vocabulary.getSound();
-                if(language.equals("chinese"))
-                    sound += "_";
-                MediaPlayer mediaPlayer = MediaPlayer.create(context,
-                        context.getResources().getIdentifier(sound, "raw", context.getPackageName()));
-                mediaPlayer.start();
+//                String sound = vocabulary.getSound();
+//                if(language.equals("chinese"))
+//                    sound += "_";
+//                MediaPlayer mediaPlayer = MediaPlayer.create(context,
+//                        context.getResources().getIdentifier(sound, "raw", context.getPackageName()));
+//                mediaPlayer.start();
             }
         });
 

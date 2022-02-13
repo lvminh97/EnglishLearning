@@ -26,7 +26,7 @@ public class SearchResultActivity extends AppCompatActivity {
         lvSearchResult = findViewById(R.id.lv_search_result);
 
         List<Vocabulary> listVocabulary = (List<Vocabulary>) getIntent().getSerializableExtra("search_result");
-        VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(SearchResultActivity.this, R.layout.item_vocabulary, listVocabulary, "");
+        VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(SearchResultActivity.this, R.layout.item_vocabulary, listVocabulary);
         lvSearchResult.setAdapter(vocabularyAdapter);
     }
 }

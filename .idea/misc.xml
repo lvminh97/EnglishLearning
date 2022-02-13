@@ -3,49 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/drawable/corner_button.xml" value="0.36615384615384616" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/drawable/corner_strokew.xml" value="0.36615384615384616" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/activity_donate.xml" value="0.340625" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/activity_exam.xml" value="0.35025641025641024" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/activity_main.xml" value="0.32685185185185184" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/activity_search_result.xml" value="0.35572916666666665" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/activity_vocabulary.xml" value="0.32685185185185184" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/corner_stroke.xml" value="0.35572916666666665" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/fragment_exam.xml" value="0.19791666666666666" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/item_topic.xml" value="0.35572916666666665" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/layout/item_vocabulary.xml" value="0.35572916666666665" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/menu/menu.xml" value="0.35572916666666665" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2140625" />
-        <entry key="..\:/AndroidProjects/learn_english/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2140625" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/drawable/bg_edit_text.xml" value="0.3328125" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/drawable/side_nav_bar.xml" value="0.31927083333333334" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/bg_edit_text.xml" value="0.31666666666666665" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/edit_text_border.xml" value="0.3177083333333333" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/fragment_english.xml" value="0.15989583333333332" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/fragment_translate.xml" value="0.28802083333333334" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/item_topic.xml" value="0.3177083333333333" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/nav_header_main.xml" value="0.3177083333333333" />
-        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/xml/network_security_config.xml" value="0.22135416666666666" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/layout/activity_login.xml" value="0.3625" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/layout/activity_signup.xml" value="1.0" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/layout/activity_vocabulary.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/layout/fragment_english.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/learn_english/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/activity_exam.xml" value="0.16666666666666666" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/activity_search_result.xml" value="0.16666666666666666" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/activity_vocabulary.xml" value="0.16666666666666666" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/fragment_exam.xml" value="0.176" />
-        <entry key="..\:/restore/learn_english/app/src/main/res/layout/item_vocabulary.xml" value="0.16666666666666666" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.29270833333333335" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/drawable/ic_exam.xml" value="0.29270833333333335" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/activity_add_topic.xml" value="0.36666666666666664" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/activity_add_vocabulary.xml" value="0.2598958333333333" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/activity_vocabulary.xml" value="0.22135416666666666" />
+        <entry key="..\:/Project/Android/EnglishLearning/app/src/main/res/layout/fragment_english.xml" value="0.22135416666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

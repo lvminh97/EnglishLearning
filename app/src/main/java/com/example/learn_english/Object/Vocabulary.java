@@ -3,77 +3,57 @@ package com.example.learn_english.Object;
 import java.io.Serializable;
 
 public class Vocabulary implements Serializable {
-    int vocabularyID;
-    int topicID;
-    int vocabularyImage;
-    String english;
-    String vietnamese;
-    String chinese;
-    String sound;
+    String vocabularyID;
+    String topicID;
+    String vocabularyImage;
+    String vocabulary;
+    String mean;
 
-    public Vocabulary(int vocabularyID, int topicID, int vocabularyImage, String english, String vietnamese, String chinese, String sound) {
+    public Vocabulary(String vocabularyID, String topicID, String vocabularyImage, String vocabulary, String mean) {
         this.vocabularyID = vocabularyID;
         this.topicID = topicID;
         this.vocabularyImage = vocabularyImage;
-        this.english = english;
-        this.vietnamese = vietnamese;
-        this.chinese = chinese;
-        this.sound = sound;
+        this.vocabulary = vocabulary;
+        this.mean = mean;
     }
 
-    public int getVocabularyID() {
+    public String getVocabularyID() {
         return vocabularyID;
     }
 
-    public void setVocabularyID(int vocabularyID) {
+    public void setVocabularyID(String vocabularyID) {
         this.vocabularyID = vocabularyID;
     }
 
-    public int getTopicID() {
+    public String getTopicID() {
         return topicID;
     }
 
-    public void setTopicID(int topicID) {
+    public void setTopicID(String topicID) {
         this.topicID = topicID;
     }
 
-    public int getVocabularyImage() {
+    public String getVocabularyImage() {
         return vocabularyImage;
     }
 
-    public void setVocabularyImage(int vocabularyImage) {
+    public void setVocabularyImage(String vocabularyImage) {
         this.vocabularyImage = vocabularyImage;
     }
 
-    public String getEnglish() {
-        return english;
+    public String getVocabulary() {
+        return vocabulary;
     }
 
-    public void setEnglish(String english) {
-        this.english = english;
+    public void setVocabulary(String vocabulary) {
+        this.vocabulary = vocabulary;
     }
 
-    public String getVietnamese() {
-        return vietnamese;
+    public String getMean() {
+        return mean;
     }
 
-    public void setVietnamese(String vietnamese) {
-        this.vietnamese = vietnamese;
-    }
-
-    public String getChinese() {
-        return chinese;
-    }
-
-    public void setChinese(String chinese) {
-        this.chinese = chinese;
-    }
-
-    public String getSound() {
-        return sound;
-    }
-
-    public void setSound(String sound) {
-        this.sound = sound;
+    public void setMean(String mean) {
+        this.mean = mean;
     }
 }

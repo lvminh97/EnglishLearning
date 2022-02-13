@@ -1,6 +1,8 @@
 package com.example.learn_english.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.learn_english.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 
 public class TopicAdapter extends ArrayAdapter<Topic> {
@@ -40,13 +43,10 @@ public class TopicAdapter extends ArrayAdapter<Topic> {
         TextView txtTopic = convertView.findViewById(R.id.txt_topic);
 
         Topic topic = listTopic.get(position);
-        try {
-            InputStream inputStream = context.getAssets().open("image/" + topic.getTopicImage() + ".jpg");
-            Drawable drawable = Drawable.createFromStream(inputStream, null);
-            imgTopic.setImageDrawable(drawable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        byte[] decodedString = Base64.getDecoder().decode(topic.getTopicImage());
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imgTopic.setImageBitmap(decodedByte);
         txtTopic.setText(topic.getTopicName());
 
         return convertView;

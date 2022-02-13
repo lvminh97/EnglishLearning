@@ -19,11 +19,12 @@
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.SignupActivity"/>
+        <activity android:name=".Activity.AddTopicActivity"/>
+        <activity android:name=".Activity.AddVocabularyActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

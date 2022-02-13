@@ -44,7 +44,7 @@ public class ChineseFragment extends Fragment {
             model.copyDB();
         }
 
-        final List<Topic> listTopic = model.getListTopic();
+        final List<Topic> listTopic = model.getListTopic("chinese");
         TopicAdapter topicAdapter = new TopicAdapter(getContext(), R.layout.item_topic, listTopic);
         grvTopic.setAdapter(topicAdapter);
 

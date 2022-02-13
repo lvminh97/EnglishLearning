@@ -1,21 +1,21 @@
 package com.example.learn_english.Object;
 
 public class Topic {
-    int topicID;
+    String topicID;
     String topicName;
     String topicImage;
 
-    public Topic(int topicID, String topicName, String imageName) {
+    public Topic(String topicID, String topicName, String imageName) {
         this.topicID = topicID;
         this.topicName = topicName;
         this.topicImage = imageName;
     }
 
-    public int getTopicID() {
+    public String getTopicID() {
         return topicID;
     }
 
-    public void setTopicID(int topicID) {
+    public void setTopicID(String topicID) {
         this.topicID = topicID;
     }
 
