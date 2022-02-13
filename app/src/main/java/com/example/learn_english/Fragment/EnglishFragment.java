@@ -3,7 +3,6 @@ package com.example.learn_english.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import android.widget.GridView;
 
 import com.example.learn_english.Activity.AddTopicActivity;
 import com.example.learn_english.Activity.EditTopicActivity;
-import com.example.learn_english.Activity.ExamActivity;
-import com.example.learn_english.Activity.MainActivity;
 import com.example.learn_english.Activity.VocabularyActivity;
 import com.example.learn_english.Adapter.TopicAdapter;
 import com.example.learn_english.Database.Model;
@@ -28,11 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnglishFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemClickListener,

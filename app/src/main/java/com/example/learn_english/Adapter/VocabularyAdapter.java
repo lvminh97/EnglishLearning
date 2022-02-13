@@ -3,8 +3,6 @@ package com.example.learn_english.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class VocabularyAdapter extends ArrayAdapter<Vocabulary> {
     Context context;

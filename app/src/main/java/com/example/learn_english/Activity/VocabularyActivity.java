@@ -1,20 +1,13 @@
 package com.example.learn_english.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.learn_english.Adapter.TopicAdapter;
 import com.example.learn_english.Adapter.VocabularyAdapter;
 import com.example.learn_english.Database.Model;
-import com.example.learn_english.Object.Topic;
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +20,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener{
 

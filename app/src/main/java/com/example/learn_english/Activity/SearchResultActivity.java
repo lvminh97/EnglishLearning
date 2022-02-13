@@ -1,9 +1,6 @@
 package com.example.learn_english.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.example.learn_english.Adapter.VocabularyAdapter;
@@ -11,6 +8,8 @@ import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SearchResultActivity extends AppCompatActivity {
 

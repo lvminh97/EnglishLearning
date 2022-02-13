@@ -1,18 +1,16 @@
 package com.example.learn_english.Activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 
-import com.example.learn_english.Adapter.ExamAdapter;
-import com.example.learn_english.Database.Model;
-import com.example.learn_english.Object.Exam;
 import com.example.learn_english.Interface.OnUpdateResult;
+import com.example.learn_english.Object.Exam;
 import com.example.learn_english.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class ExamActivity extends AppCompatActivity implements OnUpdateResult {
 

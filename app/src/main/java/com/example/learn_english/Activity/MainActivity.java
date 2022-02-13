@@ -1,5 +1,20 @@
 package com.example.learn_english.Activity;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.example.learn_english.Fragment.ChineseFragment;
+import com.example.learn_english.Fragment.EnglishFragment;
+import com.example.learn_english.Fragment.TranslateFragment;
+import com.example.learn_english.R;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,31 +24,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import com.example.learn_english.Database.Model;
-import com.example.learn_english.Fragment.ChineseFragment;
-import com.example.learn_english.Fragment.EnglishFragment;
-import com.example.learn_english.Fragment.TranslateFragment;
-import com.example.learn_english.Object.Vocabulary;
-import com.example.learn_english.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.io.Serializable;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 

@@ -2,9 +2,6 @@ package com.example.learn_english.Fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +11,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.learn_english.Object.Exam;
 import com.example.learn_english.Interface.OnUpdateResult;
+import com.example.learn_english.Object.Exam;
 import com.example.learn_english.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 public class ExamFragment extends Fragment {
     List<Exam> listExam;
