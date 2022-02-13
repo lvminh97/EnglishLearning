@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.learn_english.Activity.AddTopicActivity;
+import com.example.learn_english.Activity.EditTopicActivity;
 import com.example.learn_english.Activity.ExamActivity;
 import com.example.learn_english.Activity.MainActivity;
 import com.example.learn_english.Activity.VocabularyActivity;
@@ -33,7 +34,9 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnglishFragment extends Fragment {
+public class EnglishFragment extends Fragment implements View.OnClickListener,
+        AdapterView.OnItemClickListener,
+        AdapterView.OnItemLongClickListener{
 
     private Context context;
     private View view;
@@ -58,23 +61,9 @@ public class EnglishFragment extends Fragment {
         grvTopic = view.findViewById(R.id.grv_topic);
         addTopicFab = view.findViewById(R.id.fab_add_topic);
         getTopicList();
-        grvTopic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), VocabularyActivity.class);
-                intent.putExtra("topic_id", listTopic.get(position).getTopicID());
-                intent.putExtra("language", "english");
-                startActivity(intent);
-            }
-        });
-        addTopicFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getBaseContext(), AddTopicActivity.class);
-                intent.putExtra("lang", "english");
-                startActivity(intent);
-            }
-        });
+        grvTopic.setOnItemClickListener(this);
+        grvTopic.setOnItemLongClickListener(this);
+        addTopicFab.setOnClickListener(this);
     }
 
     private void getTopicList(){
@@ -95,5 +84,33 @@ public class EnglishFragment extends Fragment {
                 grvTopic.setAdapter(topicAdapter);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.fab_add_topic){
+            Intent intent = new Intent(getActivity().getBaseContext(), AddTopicActivity.class);
+            intent.putExtra("lang", "english");
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), VocabularyActivity.class);
+        intent.putExtra("topic_id", listTopic.get(position).getTopicID());
+        intent.putExtra("language", "english");
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), EditTopicActivity.class);
+        intent.putExtra("lang", "english");
+        intent.putExtra("topic_id", listTopic.get(position).getTopicID());
+        intent.putExtra("topic_name", listTopic.get(position).getTopicName());
+        intent.putExtra("image", listTopic.get(position).getTopicImage());
+        startActivity(intent);
+        return true;
     }
 }

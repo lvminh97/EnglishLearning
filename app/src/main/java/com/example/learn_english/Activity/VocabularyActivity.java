@@ -90,7 +90,6 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Log.d("MyApp", document.getId() + "");
                         listVocabulary.add(new Vocabulary(document.getId(),
                                                             topicID,
                                                             document.get("image").toString(),
