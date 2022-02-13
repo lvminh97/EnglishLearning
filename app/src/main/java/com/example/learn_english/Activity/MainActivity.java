@@ -7,13 +7,22 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.learn_english.Database.Model;
 import com.example.learn_english.Fragment.ChineseFragment;
 import com.example.learn_english.Fragment.EnglishFragment;
 import com.example.learn_english.Fragment.TranslateFragment;
+import com.example.learn_english.Object.User;
 import com.example.learn_english.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -42,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        initNavigationDrawer();
         mAuth = FirebaseAuth.getInstance();
+
+        initNavigationDrawer();
+
         lang = getIntent().getStringExtra("lang");
         if(lang != null && lang.equals("chinese"))
             loadChineseFragment();
@@ -62,6 +73,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        View hView = navigationView.getHeaderView(0);
+        TextView accountTv = hView.findViewById(R.id.tv_account);
+
+        Model.userInfo = new User(mAuth.getCurrentUser().getUid().toString(), mAuth.getCurrentUser().getEmail(), "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("account").document(Model.userInfo.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    Model.userInfo.setName(task.getResult().get("fullname").toString());
+                    accountTv.setText("Hello " + Model.userInfo.getName());
+                }
+            }
+        });
     }
 
     @Override

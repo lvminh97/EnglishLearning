@@ -16,9 +16,20 @@
         android:id="@+id/tv_nav_fullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="LANGUAGE LEARNING"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Hello Test"
+        android:textSize="15sp"
+        android:textStyle="bold|italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>
