@@ -56,10 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             login();
         }
         else if(view.getId() == R.id.btn_signup){
-            if(mAuth.getCurrentUser() == null) {
-                Intent intent = new Intent(this, SignupActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
         }
     }
 

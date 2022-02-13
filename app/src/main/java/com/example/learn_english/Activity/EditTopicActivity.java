@@ -25,12 +25,14 @@ import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class EditTopicActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText topicNameEd;
     private ImageView topicImg;
-    private Button updateBtn, deleteBtn;
+    private Button updateBtn, deleteBtn, yesBtn, noBtn;
+    private ConstraintLayout confirmLayout;
     private String lang, topicID, topicName, topicImage;
 
     @Override
@@ -51,14 +53,21 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
 
         updateBtn = findViewById(R.id.btn_update_topic);
         deleteBtn = findViewById(R.id.btn_delete_topic);
+        yesBtn = findViewById(R.id.btn_confirm_yes);
+        noBtn = findViewById(R.id.btn_confirm_no);
+
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
+        yesBtn.setOnClickListener(this);
+        noBtn.setOnClickListener(this);
 
         topicImg = findViewById(R.id.img_topic);
         byte[] decodedString = Base64.getDecoder().decode(topicImage);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         topicImg.setImageBitmap(decodedByte);
         topicImg.setOnClickListener(this);
+
+        confirmLayout = findViewById(R.id.layout_confirm_delete);
     }
 
     @Override
@@ -67,8 +76,13 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
             updateTopic();
         }
         else if(v.getId() == R.id.btn_delete_topic){
-
-            deleteTopic();
+            confirmLayout.setVisibility(View.VISIBLE);
+        }
+        else if(v.getId() == R.id.btn_confirm_yes){
+            deleteVocabulariesByTopic();
+        }
+        else if(v.getId() == R.id.btn_confirm_no){
+            confirmLayout.setVisibility(View.INVISIBLE);
         }
         else if(v.getId() == R.id.img_topic){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -119,11 +133,37 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    private void deleteVocabulariesByTopic(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("vocabularies").document(topicID);
+        docRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    deleteTopic();
+                }
+            }
+        });
+    }
+
     private void deleteTopic() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
+        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection(lang).document(topicID);
+        docRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra("tab", lang);
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
+
 
     @Override
     public void onBackPressed() {

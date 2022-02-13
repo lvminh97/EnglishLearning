@@ -60,8 +60,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                             HashMap<String, String> myMap = new HashMap<>();
+                            HashMap<String, String> myMap2 = new HashMap<>();
                             myMap.put("fullname", fullnameEd.getText().toString());
                             firestore.collection("account").document(user.getUid()).set(myMap);
+                            firestore.collection("topics").document(user.getUid()).set(myMap2);
                             Toast.makeText(getBaseContext(), "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                             startActivity(intent);

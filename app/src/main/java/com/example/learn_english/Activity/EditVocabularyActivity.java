@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,12 +26,14 @@ import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class EditVocabularyActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText vocabularyEd, meanEd;
     private ImageView vocabularyImg;
-    private Button updateBtn, deleteBtn;
+    private Button updateBtn, deleteBtn, yesBtn, noBtn;
+    private ConstraintLayout confirmLayout;
     private String lang, topicID, vocabularyId, vocabulary, vocabularyImage, mean;
 
     @Override
@@ -55,14 +58,21 @@ public class EditVocabularyActivity extends AppCompatActivity implements View.On
 
         updateBtn = findViewById(R.id.btn_update_vocabulary);
         deleteBtn = findViewById(R.id.btn_delete_vocabulary);
+        yesBtn = findViewById(R.id.btn_confirm_yes);
+        noBtn = findViewById(R.id.btn_confirm_no);
+
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
+        yesBtn.setOnClickListener(this);
+        noBtn.setOnClickListener(this);
 
         vocabularyImg = findViewById(R.id.img_vocabulary);
         byte[] decodedString = Base64.getDecoder().decode(vocabularyImage);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         vocabularyImg.setImageBitmap(decodedByte);
         vocabularyImg.setOnClickListener(this);
+
+        confirmLayout = findViewById(R.id.layout_confirm_delete);
     }
 
     @Override
@@ -71,8 +81,13 @@ public class EditVocabularyActivity extends AppCompatActivity implements View.On
             updateVocabulary();
         }
         else if(v.getId() == R.id.btn_delete_vocabulary){
-
+            confirmLayout.setVisibility(View.VISIBLE);
+        }
+        else if(v.getId() == R.id.btn_confirm_yes){
             deleteVocabulary();
+        }
+        else if(v.getId() == R.id.btn_confirm_no){
+            confirmLayout.setVisibility(View.INVISIBLE);
         }
         else if(v.getId() == R.id.img_vocabulary){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -104,7 +119,7 @@ public class EditVocabularyActivity extends AppCompatActivity implements View.On
     private void updateVocabulary(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document(vocabularyId);
+        DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document(vocabularyId.toString());
         HashMap<String, String> map = new HashMap<>();
         vocabularyImg.buildDrawingCache();
         Bitmap bitmap = vocabularyImg.getDrawingCache();
@@ -127,7 +142,17 @@ public class EditVocabularyActivity extends AppCompatActivity implements View.On
     private void deleteVocabulary() {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
+        DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document(vocabularyId);
+        docRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Intent intent = new Intent(getBaseContext(), VocabularyActivity.class);
+                    intent.putExtra("topic_id", topicID);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

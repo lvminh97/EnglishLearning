@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.learn_english.Database.Model;
 import com.example.learn_english.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -84,6 +85,10 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
     private void addTopic(){
 //        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if(Model.listVocabulary.size() == 0){
+            HashMap<String, String> tmp = new HashMap<>();
+            db.collection("vocabularies").document(topicID).set(tmp);
+        }
         DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document();
         HashMap<String, String> map = new HashMap<>();
         vocabularyImg.buildDrawingCache();
