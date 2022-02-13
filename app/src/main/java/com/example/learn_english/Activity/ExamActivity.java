@@ -29,11 +29,11 @@ public class ExamActivity extends AppCompatActivity implements OnUpdateResult {
         language = getIntent().getStringExtra("language");
 
         vpExam = findViewById(R.id.vp_exam);
-        Model model = new Model(ExamActivity.this);
-        List<Exam> listExam = model.getListExam(topicID, language);
-        total = listExam.size();
-        ExamAdapter examAdapter = new ExamAdapter(getSupportFragmentManager(), listExam, ExamActivity.this);
-        vpExam.setAdapter(examAdapter);
+//        Model model = new Model(ExamActivity.this);
+//        List<Exam> listExam = model.getListExam(topicID, language);
+//        total = listExam.size();
+//        ExamAdapter examAdapter = new ExamAdapter(getSupportFragmentManager(), listExam, ExamActivity.this);
+//        vpExam.setAdapter(examAdapter);
     }
 
     @Override

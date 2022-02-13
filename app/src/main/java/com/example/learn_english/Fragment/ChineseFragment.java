@@ -39,24 +39,24 @@ public class ChineseFragment extends Fragment {
 
         grvTopic = view.findViewById(R.id.grv_topic);
 
-        Model model = new Model(getContext());
-        if (!model.isCopyDB()) {
-            model.copyDB();
-        }
+//        Model model = new Model(getContext());
+//        if (!model.isCopyDB()) {
+//            model.copyDB();
+//        }
 
-        final List<Topic> listTopic = model.getListTopic("chinese");
-        TopicAdapter topicAdapter = new TopicAdapter(getContext(), R.layout.item_topic, listTopic);
-        grvTopic.setAdapter(topicAdapter);
+//        final List<Topic> listTopic = model.getListTopic("chinese");
+//        TopicAdapter topicAdapter = new TopicAdapter(getContext(), R.layout.item_topic, listTopic);
+//        grvTopic.setAdapter(topicAdapter);
 
-        grvTopic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), VocabularyActivity.class);
-                intent.putExtra("topic_id", listTopic.get(position).getTopicID());
-                intent.putExtra("language", "chinese");
-                startActivity(intent);
-            }
-        });
+//        grvTopic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(getContext(), VocabularyActivity.class);
+//                intent.putExtra("topic_id", listTopic.get(position).getTopicID());
+//                intent.putExtra("language", "chinese");
+//                startActivity(intent);
+//            }
+//        });
     }
 
 }

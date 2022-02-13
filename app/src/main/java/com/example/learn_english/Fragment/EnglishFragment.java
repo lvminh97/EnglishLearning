@@ -45,7 +45,6 @@ public class EnglishFragment extends Fragment implements View.OnClickListener,
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private List<Topic> listTopic = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         context = container.getContext();
@@ -67,20 +66,20 @@ public class EnglishFragment extends Fragment implements View.OnClickListener,
     }
 
     private void getTopicList(){
-        listTopic = new ArrayList<Topic>();
+        Model.listTopic = new ArrayList<Topic>();
         CollectionReference colRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        listTopic.add(new Topic(document.getId().toString(),
+                        Model.listTopic.add(new Topic(document.getId().toString(),
                                 document.get("name").toString(),
                                 document.get("image").toString()));
                     }
                 }
 
-                TopicAdapter topicAdapter = new TopicAdapter(getContext(), R.layout.item_topic, listTopic);
+                TopicAdapter topicAdapter = new TopicAdapter(getContext(), R.layout.item_topic, Model.listTopic);
                 grvTopic.setAdapter(topicAdapter);
             }
         });
@@ -98,7 +97,7 @@ public class EnglishFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), VocabularyActivity.class);
-        intent.putExtra("topic_id", listTopic.get(position).getTopicID());
+        intent.putExtra("topic_id", Model.listTopic.get(position).getTopicID());
         intent.putExtra("language", "english");
         startActivity(intent);
     }
@@ -107,9 +106,7 @@ public class EnglishFragment extends Fragment implements View.OnClickListener,
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), EditTopicActivity.class);
         intent.putExtra("lang", "english");
-        intent.putExtra("topic_id", listTopic.get(position).getTopicID());
-        intent.putExtra("topic_name", listTopic.get(position).getTopicName());
-        intent.putExtra("image", listTopic.get(position).getTopicImage());
+        intent.putExtra("topic_position", position);
         startActivity(intent);
         return true;
     }

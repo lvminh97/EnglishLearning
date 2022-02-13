@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.learn_english.BuildConfig;
+import com.example.learn_english.Database.Model;
 import com.example.learn_english.Fragment.ChineseFragment;
 import com.example.learn_english.Fragment.EnglishFragment;
 import com.example.learn_english.R;
@@ -48,9 +49,10 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_topic);
         lang = getIntent().getStringExtra("lang");
-        topicID = getIntent().getStringExtra("topic_id");
-        topicName = getIntent().getStringExtra("topic_name");
-        topicImage = getIntent().getStringExtra("image");
+        int topic_position = getIntent().getIntExtra("topic_position", -1);
+        topicID = Model.listTopic.get(topic_position).getTopicID();
+        topicName = Model.listTopic.get(topic_position).getTopicName();
+        topicImage = Model.listTopic.get(topic_position).getTopicImage();
         initUI();
     }
 
@@ -76,6 +78,7 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
             updateTopic();
         }
         else if(v.getId() == R.id.btn_delete_topic){
+
             deleteTopic();
         }
         else if(v.getId() == R.id.img_topic){
@@ -128,6 +131,8 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void deleteTopic() {
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
     }
 }

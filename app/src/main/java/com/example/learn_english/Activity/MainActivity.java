@@ -86,12 +86,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onQueryTextSubmit(String query) {
                 Log.d(TAG, "onQueryTextSubmit: " + query);
 
-                Model model = new Model(MainActivity.this);
-                List<Vocabulary > listVocabulary = model.getListVocabularyByKeyword(query);
+//                Model model = new Model(MainActivity.this);
+//                List<Vocabulary > listVocabulary = model.getListVocabularyByKeyword(query);
 
-                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
-                intent.putExtra("search_result", (Serializable) listVocabulary);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+//                intent.putExtra("search_result", (Serializable) listVocabulary);
+//                startActivity(intent);
 
                 return false;
             }
