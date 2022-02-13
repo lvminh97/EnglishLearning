@@ -42,6 +42,6 @@ public class Model{
     String TAG = "Model";
 
     public static List<Topic> listTopic;
-
+    public static List<Vocabulary> listVocabulary;
 
 }

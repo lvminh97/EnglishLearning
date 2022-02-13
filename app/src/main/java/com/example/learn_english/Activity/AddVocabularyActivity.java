@@ -2,6 +2,7 @@ package com.example.learn_english.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,7 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
         vocabularyEd = findViewById(R.id.ed_vocabulary);
         meanEd = findViewById(R.id.ed_mean);
         vocabularyImg = findViewById(R.id.img_vocabulary);
+        vocabularyImg.setOnClickListener(this);
         addBtn = findViewById(R.id.btn_add_topic);
         addBtn.setOnClickListener(this);
     }
@@ -56,10 +58,35 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
         if(v.getId() == R.id.btn_add_topic){
             addTopic();
         }
+        else if(v.getId() == R.id.img_vocabulary){
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+            try {
+                startActivityForResult(Intent.createChooser(intent, "Select a File to Upload"), 101);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 101:
+                if (resultCode == RESULT_OK) {
+                    // Get the Uri of the selected file
+                    Uri uri = data.getData();
+                    vocabularyImg.setImageURI(uri);
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void addTopic(){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document();
         HashMap<String, String> map = new HashMap<>();
