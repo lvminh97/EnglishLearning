@@ -26,6 +26,7 @@
         <activity android:name=".Activity.AddTopicActivity"/>
         <activity android:name=".Activity.EditTopicActivity"/>
         <activity android:name=".Activity.AddVocabularyActivity"/>
+        <activity android:name=".Activity.EditVocabularyActivity"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

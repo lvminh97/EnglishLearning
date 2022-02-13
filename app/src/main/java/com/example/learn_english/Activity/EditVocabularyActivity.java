@@ -2,14 +2,20 @@ package com.example.learn_english.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.learn_english.BuildConfig;
+import com.example.learn_english.Database.Model;
 import com.example.learn_english.Fragment.ChineseFragment;
 import com.example.learn_english.Fragment.EnglishFragment;
 import com.example.learn_english.R;
@@ -21,42 +27,63 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.Base64;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-public class AddVocabularyActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditVocabularyActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText vocabularyEd, meanEd;
     private ImageView vocabularyImg;
-    private Button addBtn;
-    private String topicID;
-    private String lang;
+    private Button updateBtn, deleteBtn;
+    private String lang, topicID, vocabularyId, vocabulary, vocabularyImage, mean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_vocabulary);
-        initUI();
-        topicID = getIntent().getStringExtra("topic_id");
+        setContentView(R.layout.activity_edit_vocabulary);
         lang = getIntent().getStringExtra("lang");
+        int position = getIntent().getIntExtra("position", -1);
+        topicID = Model.listVocabulary.get(position).getTopicID();
+        vocabularyId = Model.listVocabulary.get(position).getVocabularyID();
+        vocabulary = Model.listVocabulary.get(position).getVocabulary();
+        vocabularyImage = Model.listVocabulary.get(position).getVocabularyImage();
+        mean = Model.listVocabulary.get(position).getMean();
+        initUI();
     }
 
     private void initUI() {
         vocabularyEd = findViewById(R.id.ed_vocabulary);
+        vocabularyEd.setText(vocabulary);
         meanEd = findViewById(R.id.ed_mean);
+        meanEd.setText(mean);
+
+        updateBtn = findViewById(R.id.btn_update_vocabulary);
+        deleteBtn = findViewById(R.id.btn_delete_vocabulary);
+        updateBtn.setOnClickListener(this);
+        deleteBtn.setOnClickListener(this);
+
         vocabularyImg = findViewById(R.id.img_vocabulary);
+        byte[] decodedString = Base64.getDecoder().decode(vocabularyImage);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        vocabularyImg.setImageBitmap(decodedByte);
         vocabularyImg.setOnClickListener(this);
-        addBtn = findViewById(R.id.btn_add_topic);
-        addBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_add_topic){
-            addTopic();
+        if(v.getId() == R.id.btn_update_vocabulary){
+            updateVocabulary();
+        }
+        else if(v.getId() == R.id.btn_delete_vocabulary){
+
+            deleteVocabulary();
         }
         else if(v.getId() == R.id.img_vocabulary){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -85,18 +112,18 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void addTopic(){
-//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private void updateVocabulary(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document();
+        DocumentReference docRef = db.collection("vocabularies").document(topicID).collection("words").document(vocabularyId);
         HashMap<String, String> map = new HashMap<>();
         vocabularyImg.buildDrawingCache();
         Bitmap bitmap = vocabularyImg.getDrawingCache();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
         byte[] image = stream.toByteArray();
-        map.put("image", Base64.getEncoder().encodeToString(image));
         map.put("vocabulary", vocabularyEd.getText().toString());
+        map.put("image", Base64.getEncoder().encodeToString(image));
         map.put("mean", meanEd.getText().toString());
         docRef.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -106,6 +133,12 @@ public class AddVocabularyActivity extends AppCompatActivity implements View.OnC
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteVocabulary() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
     }
 
     @Override

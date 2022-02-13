@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.learn_english.Adapter.TopicAdapter;
@@ -28,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener{
+public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener{
 
     String TAG = "my_VocabularyActivity";
 
@@ -39,7 +40,6 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
 
     FirebaseAuth mAuth = null;
     FirebaseFirestore db = null;
-    List<Vocabulary> listVocabulary = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
 
         examFab.setOnClickListener(this);
         addVocabularyFab.setOnClickListener(this);
+        lvVocabulary.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -83,14 +84,14 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void getVocabularyList(){
-        listVocabulary = new ArrayList<Vocabulary>();
+        Model.listVocabulary = new ArrayList<Vocabulary>();
         CollectionReference colRef = db.collection("vocabularies").document(topicID).collection("words");
         colRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        listVocabulary.add(new Vocabulary(document.getId(),
+                        Model.listVocabulary.add(new Vocabulary(document.getId(),
                                                             topicID,
                                                             document.get("image").toString(),
                                                             document.get("vocabulary").toString(),
@@ -98,9 +99,25 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
                     }
                 }
 
-                VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(getBaseContext(), R.layout.item_vocabulary, listVocabulary);
+                VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(getBaseContext(), R.layout.item_vocabulary, Model.listVocabulary);
                 lvVocabulary.setAdapter(vocabularyAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getBaseContext(), EditVocabularyActivity.class);
+        intent.putExtra("lang", lang);
+        intent.putExtra("position", position);
+        startActivity(intent);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra("lang", lang);
+        startActivity(intent);
     }
 }

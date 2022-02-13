@@ -135,4 +135,11 @@ public class EditTopicActivity extends AppCompatActivity implements View.OnClick
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("topics").document(mAuth.getCurrentUser().getUid()).collection("english").document(topicID);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra("lang", lang);
+        startActivity(intent);
+    }
 }

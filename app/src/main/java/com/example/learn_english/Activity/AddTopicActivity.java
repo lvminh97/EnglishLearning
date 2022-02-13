@@ -111,4 +111,11 @@ public class AddTopicActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.putExtra("lang", lang);
+        startActivity(intent);
+    }
 }
