@@ -94,7 +94,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
                     }
                 }
 
-                VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(getBaseContext(), R.layout.item_vocabulary, Model.listVocabulary);
+                VocabularyAdapter vocabularyAdapter = new VocabularyAdapter(getBaseContext(), R.layout.item_vocabulary, Model.listVocabulary, lang);
                 lvVocabulary.setAdapter(vocabularyAdapter);
             }
         });
