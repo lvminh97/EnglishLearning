@@ -3,13 +3,13 @@ package com.example.learn_english.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.learn_english.Adapter.VocabularyAdapter;
 import com.example.learn_english.Object.Vocabulary;
 import com.example.learn_english.R;
 
 import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class SearchResultActivity extends AppCompatActivity {
 

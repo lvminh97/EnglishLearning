@@ -3,14 +3,14 @@ package com.example.learn_english.Object;
 import java.io.Serializable;
 
 public class Exam implements Serializable {
-    int examImage;
+    String examImage;
     String ans1;
     String ans2;
     String ans3;
     String ansCorrect;
     String ansChoose;
 
-    public Exam(int examImage, String ans1, String ans2, String ans3, String ansCorrect, String ansChoose) {
+    public Exam(String examImage, String ans1, String ans2, String ans3, String ansCorrect, String ansChoose) {
         this.examImage = examImage;
         this.ans1 = ans1;
         this.ans2 = ans2;
@@ -19,11 +19,11 @@ public class Exam implements Serializable {
         this.ansChoose = ansChoose;
     }
 
-    public int getExamImage() {
+    public String getExamImage() {
         return examImage;
     }
 
-    public void setExamImage(int examImage) {
+    public void setExamImage(String examImage) {
         this.examImage = examImage;
     }
 

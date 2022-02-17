@@ -10,14 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.learn_english.Object.Topic;
 import com.example.learn_english.R;
 
 import java.util.Base64;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class TopicAdapter extends ArrayAdapter<Topic> {
     Context context;

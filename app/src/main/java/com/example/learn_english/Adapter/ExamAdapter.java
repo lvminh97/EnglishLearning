@@ -2,17 +2,17 @@ package com.example.learn_english.Adapter;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
 import com.example.learn_english.Fragment.ExamFragment;
 import com.example.learn_english.Interface.OnUpdateResult;
 import com.example.learn_english.Object.Exam;
 
 import java.io.Serializable;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class ExamAdapter extends FragmentStatePagerAdapter {
 

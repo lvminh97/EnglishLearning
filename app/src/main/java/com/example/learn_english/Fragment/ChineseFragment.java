@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.learn_english.Activity.AddTopicActivity;
 import com.example.learn_english.Activity.EditTopicActivity;
 import com.example.learn_english.Activity.VocabularyActivity;
@@ -26,9 +29,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 public class ChineseFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemClickListener,

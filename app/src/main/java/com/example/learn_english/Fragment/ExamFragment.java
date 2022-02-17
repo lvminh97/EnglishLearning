@@ -1,6 +1,7 @@
 package com.example.learn_english.Fragment;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.learn_english.Interface.OnUpdateResult;
 import com.example.learn_english.Object.Exam;
 import com.example.learn_english.R;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 public class ExamFragment extends Fragment {
     List<Exam> listExam;
@@ -47,13 +47,11 @@ public class ExamFragment extends Fragment {
         Button btnCheck = view.findViewById(R.id.btn_check);
         final Exam exam = listExam.get(pos);
         txtNumber.setText("Câu số: " + (pos + 1));
-        try {
-            InputStream inputStream = getContext().getAssets().open("image/" + exam.getExamImage() + ".jpg");
-            Drawable drawable = Drawable.createFromStream(inputStream, null);
-            imgExam.setImageDrawable(drawable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        byte[] decodedString = Base64.getDecoder().decode(exam.getExamImage());
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imgExam.setImageBitmap(decodedByte);
+
         rbAns1.setText(exam.getAns1());
         rbAns2.setText(exam.getAns2());
         rbAns3.setText(exam.getAns3());
@@ -61,7 +59,7 @@ public class ExamFragment extends Fragment {
         rgAns.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                exam.setAnsChoose(convertID(checkedId));
+                exam.setAnsChoose(((RadioButton)view.findViewById(checkedId)).getText().toString());
             }
         });
 
@@ -73,15 +71,5 @@ public class ExamFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public String convertID(int id) {
-        if (id == R.id.rbAns1) {
-            return "A";
-        } else if (id == R.id.rbAns2) {
-            return "B";
-        } else{
-            return "C";
-        }
     }
 }

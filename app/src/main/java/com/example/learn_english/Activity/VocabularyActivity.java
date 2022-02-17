@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.learn_english.Adapter.VocabularyAdapter;
 import com.example.learn_english.Database.Model;
@@ -20,9 +24,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener{
 
@@ -65,10 +66,15 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.fab_exam){
-            Intent intent = new Intent(VocabularyActivity.this, ExamActivity.class);
-            intent.putExtra("topic_id", topicID);
-            intent.putExtra("lang", lang);
-            startActivity(intent);
+            if(Model.listVocabulary.size() < 3){
+                Toast.makeText(getBaseContext(), "Cần có tối thiểu 3 từ vựng ở chủ đề này để có thể dùng chức năng này", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent intent = new Intent(VocabularyActivity.this, ExamActivity.class);
+                intent.putExtra("topic_id", topicID);
+                intent.putExtra("lang", lang);
+                startActivity(intent);
+            }
         }
         else if(v.getId() == R.id.fab_add_vocabulary){
             Intent intent = new Intent(getBaseContext(), AddVocabularyActivity.class);
