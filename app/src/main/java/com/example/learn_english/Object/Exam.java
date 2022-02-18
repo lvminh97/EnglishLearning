@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class Exam implements Serializable {
     String examImage;
+    String examMean;
     String ans1;
     String ans2;
     String ans3;
     String ansCorrect;
     String ansChoose;
 
-    public Exam(String examImage, String ans1, String ans2, String ans3, String ansCorrect, String ansChoose) {
+    public Exam(String examImage, String examMean, String ans1, String ans2, String ans3, String ansCorrect, String ansChoose) {
         this.examImage = examImage;
+        this.examMean = examMean;
         this.ans1 = ans1;
         this.ans2 = ans2;
         this.ans3 = ans3;
@@ -25,6 +27,14 @@ public class Exam implements Serializable {
 
     public void setExamImage(String examImage) {
         this.examImage = examImage;
+    }
+
+    public String getExamMean() {
+        return examMean;
+    }
+
+    public void setExamMean(String examMean) {
+        this.examMean = examMean;
     }
 
     public String getAns1() {

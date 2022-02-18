@@ -40,6 +40,7 @@ public class ExamFragment extends Fragment {
         int pos = getArguments().getInt("pos");
         TextView txtNumber = view.findViewById(R.id.txt_number);
         ImageView imgExam = view.findViewById(R.id.img_exam);
+        TextView meanTv = view.findViewById(R.id.tv_mean);
         RadioGroup rgAns = view.findViewById(R.id.rg_ans);
         RadioButton rbAns1 = view.findViewById(R.id.rbAns1);
         RadioButton rbAns2 = view.findViewById(R.id.rbAns2);
@@ -47,6 +48,7 @@ public class ExamFragment extends Fragment {
         Button btnCheck = view.findViewById(R.id.btn_check);
         final Exam exam = listExam.get(pos);
         txtNumber.setText("Câu số: " + (pos + 1));
+        meanTv.setText(exam.getExamMean());
 
         byte[] decodedString = Base64.getDecoder().decode(exam.getExamImage());
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

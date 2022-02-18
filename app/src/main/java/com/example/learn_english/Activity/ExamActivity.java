@@ -76,6 +76,7 @@ public class ExamActivity extends AppCompatActivity implements OnUpdateResult {
 
         for(int i = 0; i < limit; i++){
             Exam exam = new Exam(Model.listVocabulary.get(quesId[i]).getVocabularyImage(),
+                    Model.listVocabulary.get(quesId[i]).getMean(),
                     "",
                     "",
                     "",
